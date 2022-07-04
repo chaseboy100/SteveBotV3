@@ -22,10 +22,10 @@ async def suggest(
   suggestion: discord.Option(discord.SlashCommandOptionType.string, 'Your Suggestion')
 ):
   if ctx.channel == bot.get_channel(suggestionchannel1ID) or ctx.channel == bot.get_channel(suggestionchannel2ID):
-    if len(f'{suggestion_title}') <= 100:
+    if len(f'{suggestion_title}') <= 80:
       thread = await ctx.channel.create_thread(name=f"{suggestion_title}", message=None, auto_archive_duration=10080, type=discord.ChannelType.public_thread, reason="New Suggestion")
       await ctx.respond('Suggestion Added!', delete_after=5, ephemeral=True)
-      msgtopin = await thread.send(f'Suggestion: {suggestion}')
+      msgtopin = await thread.send('Author: ' + ctx.author.mention + f'\nSuggestion: {suggestion}')
       await msgtopin.pin()
     else:
       await ctx.respond('Your title is too long!', delete_after=5, ephemeral=True)
@@ -43,7 +43,7 @@ async def report(
     if len(f'{bug_title}') <= 100:
       thread = await ctx.channel.create_thread(name=f"{bug_title}", message=None, auto_archive_duration=10080, type=discord.ChannelType.public_thread, reason="New Bug")
       await ctx.respond('Bug Report Added!', delete_after=5, ephemeral=True)
-      msgtopin = await thread.send(f'Bug: {bug}')
+      msgtopin = await thread.send('Author: ' + ctx.author.mention + f'\nBug: {bug}')
       await msgtopin.pin()
     else:
       await ctx.respond('Your title is too long!', delete_after=5, ephemeral=True)
@@ -51,4 +51,4 @@ async def report(
     await ctx.respond('You can\'t make bug reports in this channel!', delete_after=5, ephemeral=True)
 
 
-bot.run("OTkyNTAyNjM0NjE3NTAzODM2.GmL1P7.FPcPkS2psgAKPUoL9uc7fJy-j9uACkA3XCezNI")
+bot.run("")
